@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* Palet warna diambil langsung dari Mockup Komdigi.pdf (halaman Beranda). */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy: #0e1a4d;
+  --color-navy-soft: #2a3662;
+  --color-brand: #213474;
+  --color-primary: #1c3fb8;
+  --color-primary-hover: #16329a;
+  --color-accent: #002afb;
+  --color-cta: #004ff0;
+  --color-cta-hover: #0040c4;
+  --color-ajukan: #068400;
+  --color-sun: #ffe44d;
+  --color-sun-hover: #ffd91a;
+  --color-muted: #647090;
+  --color-page: #f4f6fb;
+  --color-soft: #ebf4fd;
+  --color-line: #e3e8f2;
+  --color-panel: #d6e1eb;
+  --color-footer-bar: #f4f9fd;
+  --color-placeholder: #d8d8d8;
+
+  --color-chip-sektor: #e6ebff;
+  --color-chip-sektor-fg: #002afb;
+  --color-chip-tek: #e4fbf2;
+  --color-chip-tek-fg: #1f9466;
+  --color-chip-status: #fdf2e4;
+  --color-chip-status-fg: #c45e00;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-navy);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
