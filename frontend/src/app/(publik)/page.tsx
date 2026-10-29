@@ -7,7 +7,7 @@ import { getMitra } from "@/lib/katalog";
 
 export default function Beranda() {
   return (
-    <div className="mx-auto max-w-[1440px] space-y-14 px-4 pt-6 sm:px-6 lg:space-y-16 lg:pt-8">
+    <div className="mx-auto max-w-[1440px] space-y-14 px-4 pb-20 pt-6 sm:px-6 lg:space-y-16 lg:pt-8">
       <Hero />
       <SearchSection />
       <KatalogShowcase />

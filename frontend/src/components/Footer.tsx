@@ -22,7 +22,7 @@ function KolomLink({ judul, links }: { judul: string; links: { label: string; hr
 
 export default function Footer() {
   return (
-    <footer className="mt-20 border-t border-line bg-white">
+    <footer className="border-t border-line bg-white">
       <div className="mx-auto grid max-w-[1536px] gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1fr_auto_auto_auto] md:gap-12 lg:gap-20">
         <Link href="/" className="self-start" aria-label="Beranda">
           <Image src="/images/logo-komdigi.png" alt="Logo Komdigi" width={360} height={252} className="h-24 w-auto" />
@@ -58,9 +58,16 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-line bg-footer-bar px-4 py-4 text-center text-[11px] text-muted">
-        © {SITE.tahun} PLATFORM. {SITE.pemilik}. All Rights Reserved
-      </div>
+      <HakCipta />
     </footer>
+  );
+}
+
+/** Baris hak cipta. Dipakai sendiri (tanpa footer lengkap) di konsol/dashboard. */
+export function HakCipta() {
+  return (
+    <div className="border-t border-line bg-footer-bar px-4 py-4 text-center text-[11px] text-muted">
+      © {SITE.tahun} PLATFORM. {SITE.pemilik}. All Rights Reserved
+    </div>
   );
 }
