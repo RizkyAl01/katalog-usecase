@@ -8,14 +8,10 @@ const HALAMAN: Record<string, { judul: string; deskripsi: string }> = {
     deskripsi:
       "Pengajuan use case AI beserta penentuan kategori risiko, verifikasi, dan (bila diperlukan) regulatory sandbox sebelum dipublikasikan.",
   },
-  masuk: {
-    judul: "Masuk",
-    deskripsi: "Masuk ke akun Anda sebagai Penyedia, Pengguna, Inovator, Investor, Reviewer, atau Regulator.",
-  },
-  daftar: {
-    judul: "Daftar Akun",
+  "lupa-password": {
+    judul: "Lupa Password",
     deskripsi:
-      "Registrasi akun untuk Penyedia, Pengguna, Inovator Use Case, dan Investor, serta registrasi akun K/L untuk Regulator dan Reviewer.",
+      "Reset password melalui tautan yang dikirim ke email terdaftar. Fitur ini membutuhkan layanan email dan belum tersedia di mode demo.",
   },
   tentang: { judul: "Tentang Kami", deskripsi: "Informasi mengenai AI Sandbox Nasional dan Direktorat Jenderal Ekosistem Digital." },
   "kebijakan-privasi": { judul: "Kebijakan Privasi", deskripsi: "Kebijakan pengelolaan dan perlindungan data pribadi pengguna platform." },
