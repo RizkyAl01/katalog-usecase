@@ -4,8 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, LayoutDashboard, Menu, X } from "lucide-react";
 import { LAYANAN, NAV_UTAMA, SITE } from "@/lib/site";
+
+interface SesiNavbar {
+  nama: string;
+  peran: string;
+  konsol: string;
+}
 
 function isAktif(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
@@ -24,6 +30,21 @@ export default function Navbar() {
   const [mobileBuka, setMobileBuka] = useState(false);
   const layananRef = useRef<HTMLDivElement>(null);
   const layananAktif = pathname.startsWith("/layanan");
+  const [sesi, setSesi] = useState<SesiNavbar | null>(null);
+
+  // Halaman publik dirender statis, jadi status login diambil di sisi klien.
+  useEffect(() => {
+    let batal = false;
+    fetch("/api/sesi", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: SesiNavbar | null) => {
+        if (!batal) setSesi(data);
+      })
+      .catch(() => {});
+    return () => {
+      batal = true;
+    };
+  }, []);
 
   useEffect(() => {
     setLayananBuka(false);
@@ -99,12 +120,30 @@ export default function Navbar() {
         </ul>
 
         <div className="ml-auto hidden items-center gap-6 lg:flex">
-          <Link href="/masuk" className="text-[15px] font-medium text-primary hover:underline">
-            Masuk
-          </Link>
-          <Link href="/daftar" className="rounded-md bg-primary px-5 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover">
-            Daftar
-          </Link>
+          {sesi ? (
+            <>
+              <span className="text-right leading-tight">
+                <span className="block text-sm font-semibold text-navy">{sesi.nama}</span>
+                <span className="block text-xs text-muted">{sesi.peran}</span>
+              </span>
+              <Link
+                href={sesi.konsol}
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover"
+              >
+                <LayoutDashboard className="size-4" aria-hidden />
+                Dashboard
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/masuk" className="text-[15px] font-medium text-primary hover:underline">
+                Masuk
+              </Link>
+              <Link href="/daftar" className="rounded-md bg-primary px-5 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover">
+                Daftar
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -140,14 +179,20 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex gap-3">
-            <Link href="/masuk" className="flex-1 rounded-md border border-primary py-2.5 text-center font-semibold text-primary">
-              Masuk
+          {sesi ? (
+            <Link href={sesi.konsol} className="mt-4 block rounded-md bg-primary py-2.5 text-center font-semibold text-white">
+              Dashboard — {sesi.nama}
             </Link>
-            <Link href="/daftar" className="flex-1 rounded-md bg-primary py-2.5 text-center font-semibold text-white">
-              Daftar
-            </Link>
-          </div>
+          ) : (
+            <div className="mt-4 flex gap-3">
+              <Link href="/masuk" className="flex-1 rounded-md border border-primary py-2.5 text-center font-semibold text-primary">
+                Masuk
+              </Link>
+              <Link href="/daftar" className="flex-1 rounded-md bg-primary py-2.5 text-center font-semibold text-white">
+                Daftar
+              </Link>
+            </div>
+          )}
         </div>
       )}
     </header>
